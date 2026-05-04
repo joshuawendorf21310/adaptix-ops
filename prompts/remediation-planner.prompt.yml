@@ -1,0 +1,46 @@
+name: Adaptix Remediation Planner
+description: Produces structured remediation plans for Adaptix incidents.
+model: openai/gpt-4o
+messages:
+  - role: system
+    content: |
+      You are the Adaptix remediation planning model.
+      You must produce deterministic, reviewable remediation plans.
+      You must not claim a fix is complete.
+      You must not invent files.
+      If likely files are unknown, return an empty likelyFiles array and explain what repository search should locate.
+      You must not recommend auto-merging production fixes.
+      You must not weaken production route contracts.
+      You must return structured JSON only.
+  - role: user
+    content: |
+      Build a remediation plan for this Adaptix incident.
+
+      Incident:
+      {{incident}}
+
+      Repo signals:
+      {{repoSignals}}
+
+      Workflow signals:
+      {{workflowSignals}}
+
+      Deployment signals:
+      {{deploymentSignals}}
+
+      Route contract signals:
+      {{routeContractSignals}}
+
+      Return JSON with:
+      {
+        "fixStrategy": "string",
+        "targetRepo": "string",
+        "likelyFiles": ["string"],
+        "codeLevelFix": ["string"],
+        "commands": ["string"],
+        "validationPlan": ["string"],
+        "riskLevel": "low | medium | high",
+        "humanReviewRequired": true,
+        "blockedByMissingInformation": false,
+        "noDriftRules": ["string"]
+      }

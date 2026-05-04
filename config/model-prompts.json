@@ -1,0 +1,63 @@
+{
+  "incidentClassifier": {
+    "promptPath": "prompts/incident-classifier.prompt.yml",
+    "requiredInputs": [
+      "contractId",
+      "repo",
+      "service",
+      "environment",
+      "failureType",
+      "severity",
+      "validationCommand",
+      "expectedResult",
+      "actualResult",
+      "rawEvidence"
+    ],
+    "requiredOutputs": [
+      "severity",
+      "failureCategory",
+      "productionImpact",
+      "rootCauseHypotheses",
+      "confidence",
+      "noDriftWarnings"
+    ]
+  },
+  "remediationPlanner": {
+    "promptPath": "prompts/remediation-planner.prompt.yml",
+    "requiredInputs": [
+      "incident",
+      "repoSignals",
+      "workflowSignals",
+      "deploymentSignals",
+      "routeContractSignals"
+    ],
+    "requiredOutputs": [
+      "fixStrategy",
+      "targetRepo",
+      "likelyFiles",
+      "commands",
+      "validationPlan",
+      "riskLevel",
+      "humanReviewRequired"
+    ]
+  },
+  "codingAgentTask": {
+    "promptPath": "prompts/coding-agent-task.prompt.yml",
+    "requiredInputs": [
+      "incident",
+      "remediationPlan",
+      "validationPlan",
+      "noDriftRules"
+    ],
+    "requiredOutputs": [
+      "repo",
+      "issueTitle",
+      "taskStatement",
+      "fileTargets",
+      "codeLevelFix",
+      "validationCommands",
+      "expectedResults",
+      "noDriftRules"
+    ]
+  }
+}

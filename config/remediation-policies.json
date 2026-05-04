@@ -1,0 +1,32 @@
+{
+  "policyVersion": "1.0.0",
+  "productionImpactingFailures": [
+    "production_route_mismatch",
+    "production_deployment_failed",
+    "production_smoke_failed",
+    "production_api_health_failed",
+    "production_auth_failed",
+    "production_payment_failed",
+    "production_operational_entry_failed"
+  ],
+  "safeAutoPrCategories": [
+    "dashboard_rendering_bug",
+    "monitor_script_type_error",
+    "workflow_yaml_syntax_error",
+    "missing_repo_monitor_config",
+    "issue_label_sync_error",
+    "project_field_sync_error",
+    "prompt_schema_validation_error"
+  ],
+  "requiresHumanMergeCategories": [
+    "production_route_mismatch",
+    "production_deployment_failed",
+    "frontend_route_wiring",
+    "environment_variable_mismatch",
+    "database_migration_failure",
+    "security_critical_alert",
+    "auth_flow_failure"
+  ],
+  "defaultFixMode": "pull_request_only",
+  "autoMergeAllowed": false
+}

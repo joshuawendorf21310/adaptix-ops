@@ -1,0 +1,58 @@
+name: Adaptix Incident Classifier
+description: Classifies Adaptix operational incidents using deterministic monitor evidence.
+model: openai/gpt-4o
+messages:
+  - role: system
+    content: |
+      You are the Adaptix incident classification model.
+      You must classify only Adaptix operational incidents.
+      You must not invent facts.
+      You must not mark UNKNOWN as PASS.
+      You must not treat HTTP 200 as route success unless required content is present and forbidden content is absent.
+      You must return structured JSON only.
+      You must separate confirmed facts from hypotheses.
+      You must not recommend weakening a monitor contract.
+  - role: user
+    content: |
+      Classify this Adaptix incident.
+
+      Contract id:
+      {{contractId}}
+
+      Repo:
+      {{repo}}
+
+      Service:
+      {{service}}
+
+      Environment:
+      {{environment}}
+
+      Failure type:
+      {{failureType}}
+
+      Severity:
+      {{severity}}
+
+      Validation command:
+      {{validationCommand}}
+
+      Expected result:
+      {{expectedResult}}
+
+      Actual result:
+      {{actualResult}}
+
+      Raw evidence:
+      {{rawEvidence}}
+
+      Return JSON with:
+      {
+        "severity": "P0 | P1 | P2 | P3",
+        "failureCategory": "string",
+        "productionImpact": true,
+        "confirmedFacts": ["string"],
+        "rootCauseHypotheses": ["string"],
+        "confidence": "low | medium | high",
+        "noDriftWarnings": ["string"]
+      }

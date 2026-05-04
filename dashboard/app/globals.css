@@ -637,3 +637,448 @@ pre, code, .mono {
   color: var(--text-muted);
   font-size: 14px;
 }
+
+/* ── Confidence Badge ────────────────────────────────────────── */
+
+.confidence-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border-radius: 4px;
+  padding: 2px 6px;
+  text-transform: uppercase;
+}
+
+.confidence-high   { background: rgba(34,197,94,0.15);  color: var(--color-pass);    border: 1px solid rgba(34,197,94,0.3); }
+.confidence-medium { background: rgba(245,158,11,0.15); color: var(--color-warn);    border: 1px solid rgba(245,158,11,0.3); }
+.confidence-low    { background: rgba(107,114,128,0.15);color: var(--color-unknown); border: 1px solid rgba(107,114,128,0.3); }
+
+/* ── Model Status ────────────────────────────────────────────── */
+
+.model-status-badge {
+  font-weight: 700;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.model-status-inline {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.model-status-pass    { color: var(--color-pass); }
+.model-status-warn    { color: var(--color-warn); }
+.model-status-fail    { color: var(--color-fail); }
+.model-status-unknown { color: var(--color-unknown); }
+
+.model-unavailable-note {
+  font-size: 11px;
+  color: var(--color-unknown);
+  font-style: italic;
+}
+
+.model-unavailable-banner {
+  background: rgba(107,114,128,0.08);
+  border: 1px solid rgba(107,114,128,0.3);
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  font-size: 12px;
+}
+
+/* ── Classification Card ─────────────────────────────────────── */
+
+.classification-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.classification-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.model-pass    { border-left: 3px solid var(--color-pass); }
+.model-warn    { border-left: 3px solid var(--color-warn); }
+.model-fail    { border-left: 3px solid var(--color-fail); }
+.model-unknown { border-left: 3px solid var(--color-unknown); }
+
+.classification-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.classification-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.classification-value {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.classification-category,
+.classification-facts,
+.classification-hypotheses,
+.classification-warnings {
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.classification-footer {
+  font-size: 10px;
+  margin-top: 8px;
+}
+
+/* ── Validation Card ─────────────────────────────────────────── */
+
+.validation-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+}
+
+.validation-fail { border-left: 3px solid var(--color-fail); }
+.validation-pass { border-left: 3px solid var(--color-pass); }
+.validation-unknown { border-left: 3px solid var(--color-unknown); }
+
+.validation-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.validation-contract-id { font-size: 12px; }
+
+.validation-url {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.validation-failures {
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.validation-label {
+  font-size: 11px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.validation-missing ul,
+.validation-forbidden ul {
+  margin-left: 16px;
+  margin-top: 2px;
+}
+
+.validation-meta {
+  font-size: 10px;
+  color: var(--text-muted);
+  display: flex;
+  gap: 6px;
+}
+
+/* ── Agent Task Panel ────────────────────────────────────────── */
+
+.agent-task-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.agent-task-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.agent-task-pass    { border-left: 3px solid var(--color-pass); }
+.agent-task-unknown { border-left: 3px solid var(--color-unknown); }
+
+.agent-task-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.agent-task-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: #fff;
+  flex: 1;
+}
+
+.human-review-required {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: var(--color-warn);
+  background: rgba(245,158,11,0.1);
+  border: 1px solid rgba(245,158,11,0.3);
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+.agent-task-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.agent-task-row {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.agent-task-label {
+  color: var(--text-muted);
+  font-size: 11px;
+  min-width: 80px;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.agent-task-value { color: var(--text-secondary); }
+
+.agent-task-statement,
+.agent-task-files,
+.agent-task-validation,
+.agent-task-nodrift {
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.agent-task-code {
+  background: #0d0d14;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 11px;
+  color: #a5f3fc;
+  overflow-x: auto;
+  margin-top: 4px;
+  white-space: pre-wrap;
+}
+
+.agent-task-footer {
+  font-size: 10px;
+  margin-top: 8px;
+}
+
+/* ── Remediation Panel ───────────────────────────────────────── */
+
+.remediation-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.remediation-summary {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.remediation-enforcement {
+  font-size: 12px;
+  padding: 8px 12px;
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: 6px;
+}
+
+.remediation-enforcement-banner {
+  font-size: 12px;
+  padding: 10px 14px;
+  background: rgba(245,158,11,0.06);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.pr-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pr-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.pr-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.pr-link {
+  font-weight: 700;
+  color: #60a5fa;
+}
+
+.pr-title {
+  font-size: 13px;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.pr-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.pr-row {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.pr-label {
+  color: var(--text-muted);
+  min-width: 70px;
+}
+
+.pr-value { color: var(--text-secondary); }
+
+.pr-files {
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+
+.pr-footer {
+  font-size: 10px;
+  margin-top: 8px;
+}
+
+.risk-low    { color: var(--color-pass); }
+.risk-medium { color: var(--color-warn); }
+.risk-high   { color: var(--color-fail); }
+
+.blocked-incidents {
+  margin-top: 12px;
+}
+
+.blocked-incident-row {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  padding: 4px 0;
+}
+
+/* ── Remediation Plan Card ───────────────────────────────────── */
+
+.remediation-plan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.remediation-plan-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.remediation-plan-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.remediation-plan-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  min-width: 90px;
+}
+
+.remediation-plan-strategy,
+.remediation-plan-repo,
+.remediation-plan-files {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.risk-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* ── Model Insight Panel ─────────────────────────────────────── */
+
+.model-insight-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.model-status-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+/* ── Closure Rule Card ───────────────────────────────────────── */
+
+.closure-rule-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.closure-rule-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+/* ── Intelligence Disclaimer ─────────────────────────────────── */
+
+.intelligence-disclaimer {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 12px;
+}

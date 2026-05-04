@@ -55,13 +55,24 @@ export function saveSnapshot(snapshot: AdaptixOpsSnapshot): void {
 export function createEmptySnapshot(): AdaptixOpsSnapshot {
   return {
     generatedAt: new Date().toISOString(),
-    sweepVersion: "1.0.0",
+    sweepVersion: "2.0.0",
     overallStatus: "UNKNOWN",
     routeContracts: [],
     repoHealth: [],
     security: [],
     deployments: [],
     incidents: [],
+    intelligence: {
+      modelStatus: "UNKNOWN",
+      classifications: [],
+      remediationPlans: [],
+      codingAgentTasks: [],
+    },
+    remediation: {
+      openPrs: [],
+      blockedIncidents: [],
+      readyForHumanReview: [],
+    },
     summary: {
       totalRepos: 0,
       pass: 0,

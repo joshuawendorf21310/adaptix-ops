@@ -17,6 +17,17 @@ export const EMPTY_SNAPSHOT: AdaptixOpsSnapshot = {
   security: [],
   deployments: [],
   incidents: [],
+  intelligence: {
+    modelStatus: "UNKNOWN",
+    classifications: [],
+    remediationPlans: [],
+    codingAgentTasks: [],
+  },
+  remediation: {
+    openPrs: [],
+    blockedIncidents: [],
+    readyForHumanReview: [],
+  },
   summary: {
     totalRepos: 0,
     pass: 0,

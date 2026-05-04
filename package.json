@@ -1,7 +1,7 @@
 {
   "name": "adaptix-ops",
-  "version": "1.0.0",
-  "description": "Adaptix Polyrepo Operations Command Center",
+  "version": "2.0.0",
+  "description": "Adaptix Polyrepo Operations Command Center — Intelligent Identify-and-Fix System",
   "private": true,
   "engines": {
     "node": ">=20"
@@ -11,10 +11,16 @@
     "sweep:production": "tsx scripts/run-production-sweep.ts",
     "sweep:repos": "tsx scripts/run-repo-health-sweep.ts",
     "sweep:security": "tsx scripts/run-security-sweep.ts",
+    "sweep:intelligence": "tsx scripts/run-intelligent-incident-sweep.ts",
+    "sync:remediation": "tsx scripts/run-remediation-sync.ts",
     "check:routes": "tsx scripts/check-route-contracts.ts",
     "check:workflows": "tsx scripts/check-github-workflows.ts",
     "check:deployments": "tsx scripts/check-deployments.ts",
-    "check:security": "tsx scripts/check-security-alerts.ts"
+    "check:security": "tsx scripts/check-security-alerts.ts",
+    "ai:classify": "tsx scripts/classify-incident.ts",
+    "ai:remediate": "tsx scripts/generate-remediation-plan.ts",
+    "ai:agent-task": "tsx scripts/generate-coding-agent-task.ts",
+    "verify:production": "tsx scripts/verify-production-readiness.ts"
   },
   "dependencies": {
     "@octokit/rest": "latest",

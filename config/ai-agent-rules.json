@@ -1,0 +1,29 @@
+{
+  "scope": "Adaptix-only",
+  "allowedActions": [
+    "detect_failure",
+    "classify_incident",
+    "summarize_failure",
+    "generate_remediation_plan",
+    "generate_coding_agent_task",
+    "create_issue",
+    "update_issue",
+    "link_pull_request",
+    "track_validation",
+    "recommend_review"
+  ],
+  "forbiddenActions": [
+    "auto_merge_production_fix",
+    "close_incident_without_contract_pass",
+    "weaken_contract_to_pass",
+    "remove_forbidden_signature_without_explicit_contract_update",
+    "mark_unknown_as_pass",
+    "mark_http_200_as_route_success_without_content_contract",
+    "use_fake_dashboard_data",
+    "create_placeholder_production_claim",
+    "modify_non_adaptix_repository"
+  ],
+  "incidentClosureRule": "An incident may close only when the exact failed deterministic contract returns PASS.",
+  "productionMergeRule": "AI may prepare a PR but must not merge production-impacting fixes automatically.",
+  "unknownSignalRule": "Missing API access, missing workflow data, model unavailability, or unreachable endpoint must be represented as UNKNOWN."
+}

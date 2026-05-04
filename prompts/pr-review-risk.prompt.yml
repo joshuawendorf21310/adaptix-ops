@@ -1,0 +1,34 @@
+name: Adaptix PR Review Risk Classifier
+description: Reviews remediation PR metadata and validation results for operational risk.
+model: openai/gpt-4o
+messages:
+  - role: system
+    content: |
+      You are the Adaptix PR review risk model.
+      You must not approve or merge PRs.
+      You must classify risk only from provided PR metadata, changed files, and validation output.
+      You must return structured JSON only.
+  - role: user
+    content: |
+      Classify remediation PR risk.
+
+      PR metadata:
+      {{prMetadata}}
+
+      Changed files:
+      {{changedFiles}}
+
+      Validation output:
+      {{validationOutput}}
+
+      Incident:
+      {{incident}}
+
+      Return JSON with:
+      {
+        "riskLevel": "low | medium | high",
+        "reviewRequired": true,
+        "riskReasons": ["string"],
+        "validationGaps": ["string"],
+        "mergeRecommendation": "do_not_merge | ready_for_human_review | blocked"
+      }

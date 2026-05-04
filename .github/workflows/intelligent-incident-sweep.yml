@@ -1,0 +1,67 @@
+name: Intelligent Incident Sweep
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+# Note: 'models: read' is not a standard GitHub Actions permission scope.
+# GitHub Models access is controlled via GITHUB_TOKEN or GITHUB_MODELS_TOKEN.
+# Set GITHUB_MODELS_TOKEN as a repository secret if a separate token is required.
+# See .env.example for token configuration details.
+permissions:
+  contents: write
+  issues: write
+  pull-requests: read
+  actions: read
+  deployments: read
+  security-events: read
+
+jobs:
+  intelligent-incident-sweep:
+    name: AI Incident Classification and Remediation Planning
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout adaptix-ops
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run intelligent incident sweep
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Optional: set GITHUB_MODELS_TOKEN if a separate token is required for GitHub Models
+          GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
+        run: npm run sweep:intelligence
+
+      - name: Upload adaptix-ops.json artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: intelligence-snapshot-${{ github.run_number }}
+          path: dashboard/public/adaptix-ops.json
+          retention-days: 14
+
+      - name: Commit updated dashboard JSON
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "adaptix-ops[bot]"
+          git config user.email "adaptix-ops[bot]@users.noreply.github.com"
+          git add dashboard/public/adaptix-ops.json
+          if git diff --staged --quiet; then
+            echo "No changes to dashboard JSON — skipping commit"
+          else
+            git commit -m "chore(ops): update intelligence sweep snapshot [skip ci]"
+            git push
+          fi

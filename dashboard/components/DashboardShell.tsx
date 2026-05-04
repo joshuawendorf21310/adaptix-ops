@@ -20,6 +20,8 @@ const NAV_LINKS = [
   { href: "/deployments", label: "Deployments" },
   { href: "/incidents", label: "Incidents" },
   { href: "/security", label: "Security" },
+  { href: "/intelligence", label: "Intelligence" },
+  { href: "/remediation", label: "Remediation" },
 ];
 
 export function DashboardShell({

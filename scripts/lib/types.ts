@@ -5,6 +5,10 @@
 export type CheckStatus = "PASS" | "WARN" | "FAIL" | "BLOCKED" | "UNKNOWN";
 export type Severity = "P0" | "P1" | "P2" | "P3";
 export type IncidentStatus = "DETECTED" | "TRIAGED" | "FIXING" | "VALIDATING" | "RESOLVED";
+export type ModelStatus = "PASS" | "WARN" | "FAIL" | "UNKNOWN";
+export type Confidence = "low" | "medium" | "high";
+export type RiskLevel = "low" | "medium" | "high";
+export type MergeRecommendation = "do_not_merge" | "ready_for_human_review" | "blocked";
 
 // ── Route Contract ────────────────────────────────────────────
 
@@ -117,6 +121,98 @@ export interface Incident {
   actualResult: string;
 }
 
+// ── AI Classification ─────────────────────────────────────────
+
+export interface IncidentClassification {
+  contractId: string;
+  modelStatus: ModelStatus;
+  severity: Severity;
+  failureCategory: string;
+  productionImpact: boolean;
+  confirmedFacts: string[];
+  rootCauseHypotheses: string[];
+  confidence: Confidence;
+  noDriftWarnings: string[];
+  classifiedAt: string;
+  rawModelOutput?: unknown;
+  reason?: string;
+}
+
+// ── Remediation Plan ──────────────────────────────────────────
+
+export interface RemediationPlan {
+  contractId: string;
+  modelStatus: ModelStatus;
+  fixStrategy: string;
+  targetRepo: string;
+  likelyFiles: string[];
+  codeLevelFix: string[];
+  commands: string[];
+  validationPlan: string[];
+  riskLevel: RiskLevel;
+  humanReviewRequired: boolean;
+  blockedByMissingInformation: boolean;
+  noDriftRules: string[];
+  generatedAt: string;
+  rawModelOutput?: unknown;
+  reason?: string;
+}
+
+// ── Coding Agent Task ─────────────────────────────────────────
+
+export interface CodingAgentTask {
+  contractId: string;
+  modelStatus: ModelStatus;
+  repo: string;
+  issueTitle: string;
+  taskStatement: string;
+  fileTargets: string[];
+  codeLevelFix: string[];
+  validationCommands: string[];
+  expectedResults: string[];
+  noDriftRules: string[];
+  humanReviewRequired: boolean;
+  generatedAt: string;
+  rawModelOutput?: unknown;
+  reason?: string;
+}
+
+// ── PR Tracking ───────────────────────────────────────────────
+
+export interface RemediationPR {
+  contractId: string;
+  repo: string;
+  prNumber: number;
+  prUrl: string;
+  prTitle: string;
+  prState: string;
+  checksStatus: string;
+  reviewState: string;
+  mergeStatus: string;
+  changedFiles: string[];
+  riskLevel: RiskLevel;
+  mergeRecommendation: MergeRecommendation;
+  validationStatus: CheckStatus;
+  updatedAt: string;
+}
+
+// ── Intelligence ──────────────────────────────────────────────
+
+export interface IntelligenceSnapshot {
+  modelStatus: ModelStatus;
+  classifications: IncidentClassification[];
+  remediationPlans: RemediationPlan[];
+  codingAgentTasks: CodingAgentTask[];
+}
+
+// ── Remediation Tracking ──────────────────────────────────────
+
+export interface RemediationSnapshot {
+  openPrs: RemediationPR[];
+  blockedIncidents: string[];
+  readyForHumanReview: string[];
+}
+
 // ── Dashboard JSON ────────────────────────────────────────────
 
 export interface AdaptixOpsSnapshot {
@@ -128,6 +224,8 @@ export interface AdaptixOpsSnapshot {
   security: SecuritySummary[];
   deployments: DeploymentRecord[];
   incidents: Incident[];
+  intelligence: IntelligenceSnapshot;
+  remediation: RemediationSnapshot;
   summary: {
     totalRepos: number;
     pass: number;

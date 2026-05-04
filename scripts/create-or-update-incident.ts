@@ -34,10 +34,12 @@ if (!contract) {
   process.exit(1);
 }
 
+const foundContract = contract as RouteContract;
+
 console.log(`\n[create-or-update-incident] Evaluating contract: ${contractId}`);
 
 await ensureOpsLabels();
-const result = await evaluateRouteContract(contract);
+const result = await evaluateRouteContract(foundContract);
 
 console.log(`[create-or-update-incident] Contract status: ${result.status}`);
 

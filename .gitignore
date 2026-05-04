@@ -5,4 +5,5 @@ dist/
 dashboard/node_modules/
 dashboard/.next/
 dashboard/out/
+dashboard/next-env.d.ts
 *.log

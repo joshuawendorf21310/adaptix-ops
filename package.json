@@ -1,0 +1,26 @@
+{
+  "name": "adaptix-ops",
+  "version": "1.0.0",
+  "description": "Adaptix Polyrepo Operations Command Center",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "sweep:production": "tsx scripts/run-production-sweep.ts",
+    "sweep:repos": "tsx scripts/run-repo-health-sweep.ts",
+    "sweep:security": "tsx scripts/run-security-sweep.ts",
+    "check:routes": "tsx scripts/check-route-contracts.ts",
+    "check:workflows": "tsx scripts/check-github-workflows.ts",
+    "check:deployments": "tsx scripts/check-deployments.ts",
+    "check:security": "tsx scripts/check-security-alerts.ts"
+  },
+  "dependencies": {
+    "@octokit/rest": "latest",
+    "tsx": "latest",
+    "typescript": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {}
+}

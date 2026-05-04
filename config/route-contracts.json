@@ -1,0 +1,31 @@
+[
+  {
+    "id": "adaptixcore-production-homepage-contract",
+    "severity": "P0",
+    "repo": "joshuawendorf21310/adaptix-web",
+    "service": "adaptix-web",
+    "environment": "production",
+    "url": "https://adaptixcore.com/",
+    "method": "GET",
+    "expectedStatus": 200,
+    "requiredContent": [
+      "RUN DISPATCH",
+      "CONTROL TRANSPORT",
+      "CAPTURE REVENUE",
+      "TransportLink",
+      "CrewLink",
+      "Billing Command"
+    ],
+    "forbiddenContent": [
+      "The operational core for emergency response systems",
+      "Availability service unavailable",
+      "Platform Structure",
+      "System Status Model"
+    ],
+    "failureTitle": "P0 production route mismatch: adaptixcore.com is serving the wrong homepage",
+    "failureType": "production_route_mismatch",
+    "impact": "Public production homepage is reachable but serving the wrong frontend state.",
+    "validationCommand": "curl -L https://adaptixcore.com/ | grep -E \"RUN DISPATCH|CONTROL TRANSPORT|CAPTURE REVENUE|TransportLink|CrewLink|Billing Command\"",
+    "expectedResult": "Required cinematic landing page signatures are present and forbidden fallback signatures are absent."
+  }
+]

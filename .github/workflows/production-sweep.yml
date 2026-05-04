@@ -1,0 +1,68 @@
+name: Production Sweep
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  actions: read
+  deployments: read
+  security-events: read
+
+jobs:
+  production-sweep:
+    name: Production Route Contract Sweep
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout adaptix-ops
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run production sweep
+        id: sweep
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run sweep:production
+        continue-on-error: true
+
+      - name: Upload adaptix-ops.json artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: adaptix-ops-snapshot-${{ github.run_number }}
+          path: dashboard/public/adaptix-ops.json
+          retention-days: 30
+
+      - name: Commit updated dashboard JSON
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "adaptix-ops[bot]"
+          git config user.email "adaptix-ops[bot]@users.noreply.github.com"
+          git add dashboard/public/adaptix-ops.json
+          if git diff --staged --quiet; then
+            echo "No changes to dashboard JSON — skipping commit"
+          else
+            git commit -m "chore(ops): update production sweep snapshot [skip ci]"
+            git push
+          fi
+
+      - name: Fail workflow if P0 contract failed
+        if: steps.sweep.outcome == 'failure'
+        run: |
+          echo "::error::P0 production route contract FAILED. See sweep output above."
+          exit 1

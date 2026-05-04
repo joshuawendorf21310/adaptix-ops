@@ -1,0 +1,20 @@
+{
+  "alertThresholds": {
+    "dependabot": {
+      "critical": "FAIL",
+      "high": "FAIL",
+      "medium": "WARN",
+      "low": "WARN"
+    },
+    "codeScanning": {
+      "critical": "FAIL",
+      "high": "FAIL",
+      "medium": "WARN",
+      "low": "WARN"
+    },
+    "secretScanning": {
+      "any": "FAIL"
+    }
+  },
+  "inaccessible": "UNKNOWN"
+}

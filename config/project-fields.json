@@ -1,0 +1,22 @@
+{
+  "projectTitle": "Adaptix Polyrepo Operations",
+  "fields": [
+    { "name": "Repo", "type": "text" },
+    { "name": "Service", "type": "text" },
+    { "name": "Environment", "type": "text" },
+    { "name": "Severity", "type": "single_select", "options": ["P0", "P1", "P2", "P3"] },
+    { "name": "Failure Type", "type": "text" },
+    { "name": "Workflow", "type": "text" },
+    { "name": "Commit SHA", "type": "text" },
+    { "name": "Deployment URL", "type": "text" },
+    { "name": "First Detected", "type": "date" },
+    { "name": "Last Detected", "type": "date" },
+    { "name": "Validation Command", "type": "text" },
+    { "name": "Expected Result", "type": "text" },
+    { "name": "Actual Result", "type": "text" },
+    { "name": "Owner", "type": "text" },
+    { "name": "Status", "type": "single_select", "options": ["DETECTED", "TRIAGED", "FIXING", "VALIDATING", "RESOLVED"] },
+    { "name": "Production Impact", "type": "text" }
+  ],
+  "statusColumns": ["DETECTED", "TRIAGED", "FIXING", "VALIDATING", "RESOLVED"]
+}

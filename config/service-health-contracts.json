@@ -1,0 +1,13 @@
+[
+  {
+    "id": "adaptixcore-health",
+    "repo": "joshuawendorf21310/adaptix-core",
+    "service": "adaptix-core",
+    "environment": "production",
+    "url": "https://adaptixcore.com/api/health",
+    "method": "GET",
+    "expectedStatus": 200,
+    "severity": "P0",
+    "description": "Core service health endpoint"
+  }
+]
